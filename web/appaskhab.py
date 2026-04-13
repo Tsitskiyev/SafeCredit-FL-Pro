@@ -248,10 +248,10 @@ if model is None:
     st.error("Не найден глобальный FL checkpoint. Сначала запусти федеративное обучение.")
     st.stop()
 else:
-    st.success(f"Модель загружена: {ckpt_name}")
+    st.success(f"Model downloaded: {ckpt_name}")
 
 with st.sidebar:
-    st.subheader("Policy (глобально)")
+    st.subheader("Policy (Globaly)")
     t_approve = st.slider("PD threshold: Auto-Approve", 0.01, 0.60, 0.15, 0.01)
     t_review = st.slider("PD threshold: Manual-Review upper bound", 0.05, 0.80, 0.30, 0.01)
 
@@ -277,7 +277,7 @@ tab1, tab2, tab3 = st.tabs(
 # TAB 1: Underwriter
 # -------------------------
 with tab1:
-    st.subheader("Анкета заемщика")
+    st.subheader("Borrower's profile")
 
     c1, c2 = st.columns(2)
     with c1:
@@ -336,17 +336,17 @@ with tab1:
         if flags:
             st.warning("Ключевые risk flags: " + ", ".join(flags))
         else:
-            st.success("Явных risk flags по базовым правилам не выявлено.")
+            st.success("There are no obvious risk flags according to the basic rules.")
 
         st.info(
-            "Это decision-support инструмент: финальное решение принимает кредитная политика банка и андеррайтер."
+            "This is a decision-support tool: the final decision is made by the bank's credit policy and the underwriter."
         )
 
 # -------------------------
 # TAB 2: Portfolio Simulator
 # -------------------------
 with tab2:
-    st.subheader("Портфельная симуляция: прибыль/риск при выбранной политике")
+    st.subheader("Portfolio simulation: profit/risk under the chosen policy")
 
     s1, s2, s3 = st.columns(3)
     with s1:
