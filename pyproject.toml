@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "safecredit_fl_pro"
+version = "0.1.0"
+description = "SafeCredit-FL-Pro"
+dependencies = [
+  "flwr[simulation]>=1.26.1",
+  "numpy>=1.26",
+  "torch>=2.2",
+  "scikit-learn>=1.4",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.flwr.app]
+publisher = "local"
+
+[tool.flwr.app.components]
+serverapp = "app.server_app:app"
+clientapp = "app.client_app:app"
+
+[tool.flwr.app.config]
+num-server-rounds = 5
+local-epochs = 1
+learning-rate = 0.001
+batch-size = 128
+
+min-fit-clients = 5
+min-evaluate-clients = 5
+min-available-clients = 5
+
+# SecAgg+ параметры (для 5 банков)
+num-shares = 3
+reconstruction-threshold = 2
+max-weight = 9000
+timeout = 30.0
